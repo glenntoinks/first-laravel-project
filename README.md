@@ -1,3 +1,1 @@
-# LARAVEL 10 Course
-
-## My first Laravel project.
+LARAVEL 10 Course

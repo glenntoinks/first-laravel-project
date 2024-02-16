@@ -16,6 +16,7 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
+    // if DB_connection no value then mysql
 
     /*
     |--------------------------------------------------------------------------

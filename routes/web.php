@@ -17,7 +17,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
+    return view('welcome');
 
     // get all users / get a specific user
     // $users = DB::select('select * from users');
@@ -49,13 +49,14 @@ Route::get('/', function () {
     // query builder delete a user
     // $user = DB::table('users')->where('id', 3)->delete();
 
+    // https://laravel.com/docs/10.x/eloquent#retrieving-models
     // user model get
     // $user = User::where('id', 1)->first();
 
     // user model create
     // $user = User::create([
     //     'name'      => 'Shower',
-    //     'email'     => 'scolegado@gmail.com',
+    //     'email'     => 'scolegado3@gmail.com',
     //     'password'  => 'password',
     // ]);
 
@@ -63,12 +64,12 @@ Route::get('/', function () {
     // $user = User::where('id', 4)->update(['name' => 'May']);
 
     // user model find
-    // $user = User::find(4);
+    // $user = User::find(6);
     
     // user model delete
     // $user = User::where('id', 4)->delete();
 
-    dd($user);
+    // dd($user->name);
 });
 
 Route::get('/dashboard', function () {

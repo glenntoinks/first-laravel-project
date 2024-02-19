@@ -9,7 +9,13 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('avatar.update') }}" class="mt-6 space-y-6">
+    @if (session('message'))
+        <div class="text-red-500">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <form method="post" action="{{ route('avatar.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         @method('patch')
         

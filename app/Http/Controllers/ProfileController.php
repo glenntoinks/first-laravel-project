@@ -16,9 +16,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        // dd(asset().'storage/app'.$request->user()->avatar);
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+
     }
 
     /**

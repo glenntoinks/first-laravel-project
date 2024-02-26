@@ -5,6 +5,7 @@ use App\Http\Controllers\Profile\AvatarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+// use OpenAI\Laravel\Facades\OpenAI;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,3 +86,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// $result = OpenAI::chat()->create([
+//     'model' => 'gpt-3.5-turbo',
+//     'messages' => [
+//         ['role' => 'user', 'content' => 'Hello!'],
+//     ],
+// ]);
+
+// echo $result->choices[0]->message->content;

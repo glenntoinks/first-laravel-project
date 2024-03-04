@@ -5,6 +5,7 @@ use App\Http\Controllers\Profile\AvatarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 // use OpenAI\Laravel\Facades\OpenAI;
 
 /*
@@ -86,6 +87,22 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('login.github');
+
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+    $user = User::updateOrCreate(['email' => $user->email], [
+        'name' => $user->name,
+        'password' => 'password',
+    ]);
+    // dd($user);
+    Auth::login($user);
+ 
+    return redirect('/dashboard');
+});
 
 // $result = OpenAI::chat()->create([
 //     'model' => 'gpt-3.5-turbo',

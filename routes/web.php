@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -104,6 +105,13 @@ Route::get('/auth/callback', function () {
  
     return redirect('/dashboard');
 });
+
+Route::middleware('auth')->group(function () {
+    // $department   = Department::pluck('id', 'name')->all(); 
+    Route::resource('/department', DepartmentController::class);
+});
+
+
 // middleware to make sure only logged in users can view it
 Route::middleware('auth')->group(function () {
     Route::resource('/ticket', TicketController::class);

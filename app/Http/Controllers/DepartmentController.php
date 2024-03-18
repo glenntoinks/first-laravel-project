@@ -13,7 +13,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        // $department   = Department::pluck('id', 'name')->all(); 
+        // return view('/department/index', ['department'=>$department]);
+        // dd($department);
     }
 
     /**

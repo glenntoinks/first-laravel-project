@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Profile\AvatarController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -102,6 +103,14 @@ Route::get('/auth/callback', function () {
     Auth::login($user);
  
     return redirect('/dashboard');
+});
+// middleware to make sure only logged in users can view it
+Route::middleware('auth')->group(function () {
+    Route::resource('/ticket', TicketController::class);
+    // if you use the code above, you dont need to define one by one like below. make sure when you create a new table that
+    // you create it with php artisan with resource so that all of the functions will be created for you (CRUD)
+    // Route::get('/ticket/create', [TicketController::class,'create'])->name('ticket.create');
+    // Route::post('/ticket/create', [TicketController::class,'store'])->name('ticket.store');
 });
 
 // $result = OpenAI::chat()->create([

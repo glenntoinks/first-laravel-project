@@ -121,6 +121,7 @@ Route::middleware('auth')->group(function () {
     // Route::post('/ticket/create', [TicketController::class,'store'])->name('ticket.store');
 });
 
+// OPEN AI CODE
 // $result = OpenAI::chat()->create([
 //     'model' => 'gpt-3.5-turbo',
 //     'messages' => [

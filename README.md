@@ -12,6 +12,7 @@
 
 #### TABLE STRUCTURE
 1. Tickets 
+- id (int)
 - title (string) {required}
 - description (text) {required}
 - status (new {default}, pending user, pending update, resolved, rejected) {required}
@@ -20,17 +21,29 @@
 - status changed by (int) {nullable}
 - owner id (int) {nullable}
 - department id (int) {required}
+- created at {required} {filled by laravel}
+- updated at {required} {filled by laravel}
 
 2. Replies 
+- id (int)
 - body (text) {required}
 - user id (int) {required} {filled by laravel}
 - attachments(string) {nullable}
 - ticket id (int) {required}
+- created at {required} {filled by laravel}
+- updated at {required} {filled by laravel}
 
-3. Status Changes
+3. Ticket Changes
+- id (int)
 - ticket id (int) {required}
 - user id (int) {required} {filled by laravel}
 - status (new, pending user, pending update, resolved, rejected) {required}
+- owner_id (int) {required}
+- created at {required} {filled by laravel}
+- updated at {required} {filled by laravel}
 
 4. Departments
+- id (int)
 - name (string)
+- created at {required} {filled by laravel}
+- updated at {required} {filled by laravel}

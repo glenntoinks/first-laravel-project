@@ -47,7 +47,7 @@ class TicketController extends Controller
             $ticket->update(['attachments' => $path]);
         }
 
-        return response()->redirect(route('ticket.index'));
+        return redirect()->route('tickets.create');
     }
 
     /**

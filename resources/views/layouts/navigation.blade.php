@@ -19,7 +19,7 @@
             </div>
 
             <div class="flex flex-col justify-center">
-                <a href="{{route('ticket.create')}}">
+                <a href="{{route('tickets.create')}}">
                     <x-primary-button class="ml-3">
                         Create a Ticket
                     </x-primary-button>

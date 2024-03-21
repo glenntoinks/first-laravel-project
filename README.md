@@ -35,10 +35,10 @@
 
 3. Ticket Changes
 - id (int)
-- ticket id (int) {required}
+- ticket id (int) {required} {filled by laravel}
 - user id (int) {required} {filled by laravel}
-- status (new, pending user, pending update, resolved, rejected) {required}
-- owner_id (int) {required}
+- status (text) {required} {filled by laravel}
+- owner_id (int) {nullable} {nullable}
 - created at {required} {filled by laravel}
 - updated at {required} {filled by laravel}
 

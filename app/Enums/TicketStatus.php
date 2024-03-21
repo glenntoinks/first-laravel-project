@@ -8,5 +8,5 @@ enum TicketStatus: string
     case RESOLVED = 'Resolved';
     case REJECTED = 'Rejected';
     case PENDING_USER = 'Pending User';
-    case PENDING_UPSATE = 'Pending Update';
+    case PENDING_UPDATE = 'Pending Update';
 }

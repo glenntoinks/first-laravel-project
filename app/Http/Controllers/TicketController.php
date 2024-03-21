@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\TicketHistory;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Enums\TicketStatus;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -37,6 +39,14 @@ class TicketController extends Controller
             'description' => $request->description,
             'user_id' => auth()->id(),
         ]);
+
+        if($ticket){
+            $ticket_history = TicketHistory::create([
+                'ticket_id' => $ticket->id,
+                'user_id' => auth()->id(),
+                'status' => TicketStatus::NEW->value,
+            ]);
+        }
 
         if($request->file('attachment')){
             $filecontent = file_get_contents($request->file('attachment'));

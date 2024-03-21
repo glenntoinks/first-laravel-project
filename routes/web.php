@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\TicketHistoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -107,7 +108,6 @@ Route::get('/auth/callback', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    // $department   = Department::pluck('id', 'name')->all(); 
     Route::resource('/department', DepartmentController::class);
 });
 
@@ -119,6 +119,10 @@ Route::middleware('auth')->group(function () {
     // you create it with php artisan with resource so that all of the functions will be created for you (CRUD)
     // Route::get('/ticket/create', [TicketController::class,'create'])->name('ticket.create');
     // Route::post('/ticket/create', [TicketController::class,'store'])->name('ticket.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/ticket-histories', TicketHistoryController::class);
 });
 
 // OPEN AI CODE

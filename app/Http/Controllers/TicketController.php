@@ -17,7 +17,9 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        
+        $tickets = Ticket::where('user_id', auth()->id())->get();
+        return view('tickets.index', compact('tickets'));
     }
 
     /**
@@ -25,7 +27,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('ticket.create');
+        return view('tickets.create');
     }
 
     /**
@@ -57,15 +59,15 @@ class TicketController extends Controller
             $ticket->update(['attachments' => $path]);
         }
 
-        return redirect()->route('tickets.create');
+        return redirect()->route('tickets.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Ticket $ticket)
+    public function show(Ticket $ticket) //route model binding
     {
-        //
+        return view('tickets.show',compact('ticket'));
     }
 
     /**

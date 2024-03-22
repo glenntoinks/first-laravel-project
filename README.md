@@ -47,3 +47,10 @@
 - name (string)
 - created at {required} {filled by laravel}
 - updated at {required} {filled by laravel}
+
+update users with 
+is admin
+department
+
+update tickets with 
+is archived

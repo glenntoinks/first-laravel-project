@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use App\Models\TicketHistory;
+use App\Models\TicketReply;
 use App\Http\Requests\StoreTicketRequest;
+use App\Http\Requests\StoreTicketReply;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Enums\TicketStatus;
 use Illuminate\Support\Facades\Storage;
@@ -67,7 +69,13 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket) //route model binding
     {
-        return view('tickets.show',compact('ticket'));
+        $ticketReplies = TicketReply::where('ticket_id',$ticket->id)->get();
+        return view('tickets.show',compact('ticket','ticketReplies'));
+    }
+
+    public function reply(Ticket $ticket)
+    {
+        return view('tickets.reply',compact('ticket'));
     }
 
     /**
@@ -76,6 +84,36 @@ class TicketController extends Controller
     public function edit(Ticket $ticket)
     {
         //
+    }
+
+    public function saveReply(StoreTicketReply $request, Ticket $ticket)
+    {
+        if($request->validated()){
+            $ticket_reply = TicketReply::create([
+                'ticket_id' => $ticket->id,
+                'description' => $request->description,
+                'user_id' => auth()->id(),
+            ]);
+
+            if($ticket_reply){
+                $ticket_history = TicketHistory::create([
+                    'ticket_id' => $ticket->id,
+                    'user_id' => auth()->id(),
+                    'status' => TicketStatus::NEW->value,
+                ]);
+            }
+
+            if($request->file('attachment')){
+                $filecontent = file_get_contents($request->file('attachment'));
+                $filename = Str::random(25);
+                $fileextension = $request->file('attachment')->extension();
+                $path = "attachments/$filename.$fileextension";
+                Storage::disk('public')->put($path, $filecontent);
+                $ticket_reply->update(['attachments' => $path]);
+            }
+
+            return redirect('/tickets/'.$ticket->id);
+        }
     }
 
     /**

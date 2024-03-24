@@ -114,6 +114,8 @@ Route::middleware('auth')->group(function () {
 
 // middleware to make sure only logged in users can view it
 Route::middleware('auth')->group(function () {
+    Route::get('/tickets/{ticket}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
+    Route::patch('/tickets/saveReply/{ticket}', [TicketController::class, 'saveReply'])->name('tickets.savereply');
     Route::resource('/tickets', TicketController::class);
     // if you use the code above, you dont need to define one by one like below. make sure when you create a new table that
     // you create it with php artisan with resource so that all of the functions will be created for you (CRUD)
